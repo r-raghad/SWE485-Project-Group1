@@ -1,0 +1,31 @@
+Dataset Name: Default of Credit Card Clients
+
+Source: Kaggle
+
+Dataset URL: https://www.kaggle.com/datasets/uciml/default-of-credit-card-clients-dataset
+
+Original Owner: UCI Machine Learning
+
+Original Source: UCI Machine Learning Repository
+
+License: CC0: Public Domain 
+
+Number of Rows: 30,000
+
+Number of Columns: 25
+
+Target Column: default.payment.next.month
+
+Problem Type: Binary Classification
+
+Target Classes:
+
+* 0 = No default
+* 1 = Default
+
+Missing Values: 0
+
+Duplicate Rows: 0
+
+Description:
+This dataset contains information about 30,000 credit card clients in Taiwan. It includes demographic information, credit limits, repayment status, bill amounts, and previous payments. It can be used to predict whether a client will default on their credit card payment next month.
