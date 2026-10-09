@@ -3,13 +3,6 @@
 
 ## Group Members
 
-* 
-* 
-* 
-*Retaj Alshaiban - 445202193
-* 
-* 
-* 
 ## Project Motivation
 
 Credit card default can cause financial losses for banks. Predicting which clients may default can help banks assess credit risk and make better decisions.
