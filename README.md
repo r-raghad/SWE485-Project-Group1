@@ -2,7 +2,13 @@
 # Credit Card Default Prediction
 
 ## Group Members
-
+* Retaj Alshaiban | 445202193
+* Salma Alfehaid | 445204629
+* Joud Alkahtani | 444200478
+* Layan Alshamer|445201538
+* Judi Abdelrahman | 444204721
+* Hayfa Alruwaita | 444200468
+* Raghad Abomahmoud | 444204736
 ## Project Motivation
 
 Credit card default can cause financial losses for banks. Predicting which clients may default can help banks assess credit risk and make better decisions.
