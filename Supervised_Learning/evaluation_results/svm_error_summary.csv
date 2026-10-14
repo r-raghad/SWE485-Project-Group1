@@ -1,0 +1,5 @@
+Outcome,PAY_0,MONTHS_LATE,LIMIT_BAL,PAY_AMT1
+Caught default,2.0,3.0,80000.0,1377.5
+Correct non-default,0.0,0.0,170000.0,2895.0
+False alarm,1.0,2.0,80000.0,980.0
+Missed default,0.0,0.0,140000.0,2000.0

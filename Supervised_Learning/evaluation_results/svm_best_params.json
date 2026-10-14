@@ -1,0 +1,5 @@
+{
+  "gamma": "scale",
+  "class_weight": "balanced",
+  "C": 0.1
+}
