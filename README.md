@@ -1,7 +1,7 @@
 # SWE485-Project-Group1
 # Credit Card Default Prediction
 
-## Group Members
+## Group 1 Members
 * Retaj Alshaiban | 445202193
 * Salma Alfehaid | 445204629
 * Joud Alkahtani | 444200478
