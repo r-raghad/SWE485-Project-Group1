@@ -5,7 +5,7 @@
 * Retaj Alshaiban | 445202193
 * Salma Alfehaid | 445204629
 * Joud Alkahtani | 444200478
-* Layan Alshamer |445201538
+* Layan Alshamer | 445201538
 * Judi Abdelrahman | 444204721
 * Hayfa Alruwaita | 444200468
 * Raghad Abomahmoud | 444204736
@@ -17,7 +17,7 @@ In this project, we use machine learning to predict whether a client will defaul
 
 ## Dataset
 
-We use the Default of Credit Card Clients dataset from Kaggle. It contains information about 30,000 clients in Taiwan, including credit limits, demographic information, repayment status, bill amounts, and previous payments.
+We use the Default of Credit Card Clients dataset from Kaggle. It contains information about 30,000 clients in Taiwan, including credit limits, demographic information, repayment status, bill amounts, and previous payments. This makes it suitable for our problem, as it is a real, structured dataset with features directly related to credit risk and a binary target for default prediction.
 
 Dataset source: https://www.kaggle.com/datasets/uciml/default-of-credit-card-clients-dataset
 
