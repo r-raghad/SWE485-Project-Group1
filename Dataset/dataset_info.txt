@@ -29,3 +29,6 @@ Duplicate Rows: 0
 
 Description:
 This dataset contains information about 30,000 credit card clients in Taiwan. It includes demographic information, credit limits, repayment status, bill amounts, and previous payments. It can be used to predict whether a client will default on their credit card payment next month.
+
+Original Purpose:
+Collected for a research study (Yeh & Lien, 2009) comparing data mining methods for predicting the probability of default among credit card clients in Taiwan.
