@@ -1,0 +1,5 @@
+Group,Defaulters (test set),Percent
+Caught by both,741,55.8
+Caught by Random Forest only,25,1.9
+Caught by SVM only,53,4.0
+Missed by both,508,38.3
