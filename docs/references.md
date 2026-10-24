@@ -16,19 +16,19 @@
 
 **Usage:** Used to understand functions for loading, inspecting, cleaning, and manipulating the dataset.
 
-[5] Scikit-learn developers, “scikit-learn Documentation.” [Online]. Available: https://scikit-learn.org/stable/. [Accessed: Oct. 8, 2026].
+[5] Scikit-learn developers, “scikit-learn Documentation.” [Online]. Available: https://scikit-learn.org/stable/. [Accessed: Oct. 6, 2026].
 
 **Usage:** Used to understand and apply preprocessing, cross-validation, and the Random Forest and SVM models.
 
-[6] Matplotlib Development Team, “Matplotlib Documentation.” [Online]. Available: https://matplotlib.org/stable/. [Accessed: Oct. 10, 2026].
+[6] Matplotlib Development Team, “Matplotlib Documentation.” [Online]. Available: https://matplotlib.org/stable/. [Accessed: Oct. 9, 2026].
 
 **Usage:** Used to create visualizations for exploratory data analysis (EDA) and examine feature distributions and patterns.
 
-[7] GeeksforGeeks, “Support Vector Machine (SVM) Algorithm.” [Online]. Available: https://www.geeksforgeeks.org/machine-learning/support-vector-machine-algorithm/. [Accessed: Oct. 12, 2026].
+[7] GeeksforGeeks, “Support Vector Machine (SVM) Algorithm.” [Online]. Available: https://www.geeksforgeeks.org/machine-learning/support-vector-machine-algorithm/. [Accessed: Oct. 11, 2026].
 
 **Usage:** Used to understand how SVM works as a classification algorithm.
 
-[8] GeeksforGeeks, “SVM Hyperparameter Tuning using GridSearchCV.” [Online]. Available: https://www.geeksforgeeks.org/machine-learning/svm-hyperparameter-tuning-using-gridsearchcv-ml/. [Accessed: Oct. 14, 2026].
+[8] GeeksforGeeks, “SVM Hyperparameter Tuning using GridSearchCV.” [Online]. Available: https://www.geeksforgeeks.org/machine-learning/svm-hyperparameter-tuning-using-gridsearchcv-ml/. [Accessed: Oct. 13, 2026].
 
 **Usage:** Used to understand how GridSearchCV can tune SVM hyperparameters and help select suitable parameter values.
 
