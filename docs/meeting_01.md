@@ -1,6 +1,7 @@
 # Meeting 1: Task Distribution – Phase 1
 
 **Date:** Oct 4
+
 **Attendees:** All seven team members
 
 ## Discussion
