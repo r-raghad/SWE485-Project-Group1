@@ -24,3 +24,10 @@ Dataset source: https://www.kaggle.com/datasets/uciml/default-of-credit-card-cli
 ## Project Goal
 
 The goal of this project is to explore and preprocess the dataset, train machine learning models, and evaluate their performance in predicting credit card default. The project aims to investigate how effectively machine learning can support credit risk assessment.
+
+## How to Run
+
+The notebooks read files using paths relative to the repository root
+(e.g., `Dataset/preprocessed_data.csv`). To re-run them, clone the repository
+and open the notebooks from the root folder. All outputs are already saved
+in the notebooks, so they can be reviewed on GitHub without running them.
