@@ -1,0 +1,3 @@
+algorithm,clusters,silhouette,davies_bouldin
+K-Means,3,0.2919438532003703,1.4070509095893813
+Gaussian Mixture,3,0.1956103946604107,1.6747646799669649
