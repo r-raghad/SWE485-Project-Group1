@@ -1,0 +1,27 @@
+CLUSTER PROFILES - K-Means (k = 3)
+Selected algorithm: K-Means (better than GMM on all evaluation metrics)
+Overall default rate (train): 22.1%
+
+Cluster 0 - Active On-Time Payers
+  Risk level:         Low
+  Size (train):       15,009 clients (62.5%)
+  Default rate:       13.8% train / 13.3% test (0.62x the average)
+  Key traits:         median credit limit NT$150,000; median average bill NT$33,790; 0.2 late months out of 6 on average
+  Description:        Clients who use their card regularly, with above-average bills and above-average payment amounts, and almost no late months.
+  Recommended action: Retain and grow: eligible for credit-limit increases, rewards and cross-selling. Standard monitoring.
+
+Cluster 1 - Low-Activity Cardholders
+  Risk level:         Medium
+  Size (train):       5,395 clients (22.5%)
+  Default rate:       21.5% train / 23.8% test (0.97x the average)
+  Key traits:         median credit limit NT$180,000; median average bill NT$967; 0.4 late months out of 6 on average
+  Description:        Clients who barely use their card (very small bills, many months with no activity) despite having the highest credit limits. They pay most of what they owe, but about 1 in 3 had at least one late month.
+  Recommended action: Activate and verify: usage campaigns, but review any sudden jump in spending, since the default rate is close to the portfolio average.
+
+Cluster 2 - Chronic Late Payers
+  Risk level:         High
+  Size (train):       3,596 clients (15.0%)
+  Default rate:       57.6% train / 57.0% test (2.61x the average)
+  Key traits:         median credit limit NT$50,000; median average bill NT$28,073; 4.0 late months out of 6 on average
+  Description:        Clients with low credit limits who use a large share of their limit and are late on payments in most of the last 6 months; they pay only a small part of what they are billed.
+  Recommended action: Act early: freeze limit increases, contact for repayment plans, prioritize in collections and review the case manually.

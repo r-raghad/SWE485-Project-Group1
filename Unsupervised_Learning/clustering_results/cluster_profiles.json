@@ -1,0 +1,41 @@
+{
+  "0": {
+    "segment_name": "Active On-Time Payers",
+    "risk_level": "Low",
+    "description": "Clients who use their card regularly, with above-average bills and above-average payment amounts, and almost no late months.",
+    "recommended_action": "Retain and grow: eligible for credit-limit increases, rewards and cross-selling. Standard monitoring.",
+    "key_traits": "median credit limit NT$150,000; median average bill NT$33,790; 0.2 late months out of 6 on average",
+    "clients_train": 15009,
+    "share_pct": 62.5,
+    "default_rate_train_pct": 13.8,
+    "default_rate_test_pct": 13.3,
+    "risk_vs_average": 0.62,
+    "mean_silhouette": 0.391
+  },
+  "1": {
+    "segment_name": "Low-Activity Cardholders",
+    "risk_level": "Medium",
+    "description": "Clients who barely use their card (very small bills, many months with no activity) despite having the highest credit limits. They pay most of what they owe, but about 1 in 3 had at least one late month.",
+    "recommended_action": "Activate and verify: usage campaigns, but review any sudden jump in spending, since the default rate is close to the portfolio average.",
+    "key_traits": "median credit limit NT$180,000; median average bill NT$967; 0.4 late months out of 6 on average",
+    "clients_train": 5395,
+    "share_pct": 22.5,
+    "default_rate_train_pct": 21.5,
+    "default_rate_test_pct": 23.8,
+    "risk_vs_average": 0.97,
+    "mean_silhouette": 0.158
+  },
+  "2": {
+    "segment_name": "Chronic Late Payers",
+    "risk_level": "High",
+    "description": "Clients with low credit limits who use a large share of their limit and are late on payments in most of the last 6 months; they pay only a small part of what they are billed.",
+    "recommended_action": "Act early: freeze limit increases, contact for repayment plans, prioritize in collections and review the case manually.",
+    "key_traits": "median credit limit NT$50,000; median average bill NT$28,073; 4.0 late months out of 6 on average",
+    "clients_train": 3596,
+    "share_pct": 15.0,
+    "default_rate_train_pct": 57.6,
+    "default_rate_test_pct": 57.0,
+    "risk_vs_average": 2.61,
+    "mean_silhouette": 0.109
+  }
+}

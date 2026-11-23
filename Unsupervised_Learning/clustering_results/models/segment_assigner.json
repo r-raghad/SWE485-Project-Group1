@@ -1,0 +1,235 @@
+{
+  "features": [
+    "LIMIT_BAL",
+    "PAY_AMT1",
+    "PAY_AMT2",
+    "PAY_AMT3",
+    "PAY_AMT4",
+    "PAY_AMT5",
+    "PAY_AMT6",
+    "BILL_AMT1",
+    "BILL_AMT2",
+    "BILL_AMT3",
+    "BILL_AMT4",
+    "BILL_AMT5",
+    "BILL_AMT6",
+    "AGE",
+    "MONTHS_LATE",
+    "UTILIZATION",
+    "PAY_0",
+    "PAY_2",
+    "PAY_3",
+    "PAY_4",
+    "PAY_5",
+    "PAY_6"
+  ],
+  "preprocessing": {
+    "LIMIT_BAL": {
+      "transform": "log1p",
+      "mean": 11.663333500710996,
+      "std": 0.9399869354590539
+    },
+    "PAY_AMT1": {
+      "transform": "log1p",
+      "mean": 6.63683471049147,
+      "std": 3.2439408315525546
+    },
+    "PAY_AMT2": {
+      "transform": "log1p",
+      "mean": 6.5656890148883456,
+      "std": 3.281128116960766
+    },
+    "PAY_AMT3": {
+      "transform": "log1p",
+      "mean": 6.282573530435984,
+      "std": 3.3538038834064587
+    },
+    "PAY_AMT4": {
+      "transform": "log1p",
+      "mean": 6.075225741746224,
+      "std": 3.401729629190184
+    },
+    "PAY_AMT5": {
+      "transform": "log1p",
+      "mean": 6.028615655031266,
+      "std": 3.4485747909405435
+    },
+    "PAY_AMT6": {
+      "transform": "log1p",
+      "mean": 5.91815694560333,
+      "std": 3.537353315072178
+    },
+    "BILL_AMT1": {
+      "transform": "signed_log",
+      "mean": 8.945915298939452,
+      "std": 3.559856018939667
+    },
+    "BILL_AMT2": {
+      "transform": "signed_log",
+      "mean": 8.752674289390876,
+      "std": 3.7820298254450577
+    },
+    "BILL_AMT3": {
+      "transform": "signed_log",
+      "mean": 8.611164468440768,
+      "std": 3.899983361301611
+    },
+    "BILL_AMT4": {
+      "transform": "signed_log",
+      "mean": 8.456458084304442,
+      "std": 3.978349715833385
+    },
+    "BILL_AMT5": {
+      "transform": "signed_log",
+      "mean": 8.278829489750562,
+      "std": 4.062432882569693
+    },
+    "BILL_AMT6": {
+      "transform": "signed_log",
+      "mean": 8.066445186733652,
+      "std": 4.224580528558943
+    },
+    "AGE": {
+      "transform": "none",
+      "mean": 35.432625,
+      "std": 9.195064470104265
+    },
+    "MONTHS_LATE": {
+      "transform": "none",
+      "mean": 0.8357083333333334,
+      "std": 1.5507954673639992
+    },
+    "UTILIZATION": {
+      "transform": "none",
+      "mean": 0.42334157395044697,
+      "std": 0.41043879117467114
+    },
+    "PAY_0": {
+      "transform": "none",
+      "mean": -0.014125,
+      "std": 1.1231319977521288
+    },
+    "PAY_2": {
+      "transform": "none",
+      "mean": -0.13408333333333333,
+      "std": 1.1987931402271512
+    },
+    "PAY_3": {
+      "transform": "none",
+      "mean": -0.16691666666666666,
+      "std": 1.194140762105529
+    },
+    "PAY_4": {
+      "transform": "none",
+      "mean": -0.22133333333333333,
+      "std": 1.161899976570857
+    },
+    "PAY_5": {
+      "transform": "none",
+      "mean": -0.2703333333333333,
+      "std": 1.1251680862083995
+    },
+    "PAY_6": {
+      "transform": "none",
+      "mean": -0.29333333333333333,
+      "std": 1.1454426606726855
+    }
+  },
+  "centers": [
+    [
+      0.0942094669431059,
+      0.43480115794000757,
+      0.4383456620947135,
+      0.43118961074358214,
+      0.4210868863765355,
+      0.3902718095438145,
+      0.3651724281153691,
+      0.3300246354726164,
+      0.36993016276688084,
+      0.39825891656304907,
+      0.4082517674684486,
+      0.4063269245353679,
+      0.3744636016604857,
+      -0.01868192514091145,
+      -0.3982724916511518,
+      0.17095467252556273,
+      -0.14071219497063814,
+      -0.07867325817763655,
+      -0.028050645182158537,
+      0.02024157781303813,
+      0.04739754222729316,
+      0.07489784944897554
+    ],
+    [
+      0.2359038018027235,
+      -0.8434008243263822,
+      -0.9475190771206726,
+      -0.9885953351881113,
+      -0.9929950884374955,
+      -0.9401343198385735,
+      -0.8678249477266746,
+      -1.1357314313398184,
+      -1.2698508649924634,
+      -1.3645563699265024,
+      -1.4037368312631335,
+      -1.402567095429583,
+      -1.2968285581366277,
+      0.08260844895339173,
+      -0.2630294066097649,
+      -0.8077764438973825,
+      -0.4689975693595555,
+      -0.8225171196483402,
+      -0.8808043446040894,
+      -0.973112380749891,
+      -1.0180007855845803,
+      -1.0289341842544193
+    ],
+    [
+      -0.7471331757716271,
+      -0.5494391357844108,
+      -0.4080268691083216,
+      -0.31653310186612027,
+      -0.26776545481232766,
+      -0.21845520965350698,
+      -0.2221794718014918,
+      0.32645476036424464,
+      0.3611133491841552,
+      0.38495927059473584,
+      0.4020326548194276,
+      0.40831164335129605,
+      0.38266570462315685,
+      -0.045960947626143576,
+      2.0569286640299826,
+      0.4983579629839286,
+      1.2909319302027555,
+      1.562371188123176,
+      1.4385293583643155,
+      1.3754547977613383,
+      1.3294562088262978,
+      1.2310784487410784
+    ]
+  ],
+  "profiles": {
+    "0": {
+      "segment_name": "Active On-Time Payers",
+      "risk_level": "Low",
+      "description": "Clients who use their card regularly, with above-average bills and above-average payment amounts, and almost no late months.",
+      "recommended_action": "Retain and grow: eligible for credit-limit increases, rewards and cross-selling. Standard monitoring.",
+      "default_rate_train_pct": 13.8
+    },
+    "1": {
+      "segment_name": "Low-Activity Cardholders",
+      "risk_level": "Medium",
+      "description": "Clients who barely use their card (very small bills, many months with no activity) despite having the highest credit limits. They pay most of what they owe, but about 1 in 3 had at least one late month.",
+      "recommended_action": "Activate and verify: usage campaigns, but review any sudden jump in spending, since the default rate is close to the portfolio average.",
+      "default_rate_train_pct": 21.5
+    },
+    "2": {
+      "segment_name": "Chronic Late Payers",
+      "risk_level": "High",
+      "description": "Clients with low credit limits who use a large share of their limit and are late on payments in most of the last 6 months; they pay only a small part of what they are billed.",
+      "recommended_action": "Act early: freeze limit increases, contact for repayment plans, prioritize in collections and review the case manually.",
+      "default_rate_train_pct": 57.6
+    }
+  }
+}
