@@ -1,0 +1,127 @@
+[
+    {
+        "case": 1,
+        "customer_id": 18124,
+        "prompt": "\nYou are a senior credit risk officer writing a decision memo about ONE\ncredit card customer for a colleague who must act on the account today.\n\nDECISION POLICY (choose the action level from the default probability):\n- Below 35%      -> \"Standard monitoring\"\n- 35% to 49.99%  -> \"Enhanced monitoring\"\n- 50% to 64.99%  -> \"Manual review\"\n- 65% or higher  -> \"Urgent intervention\"\n\nRULES:\n1. Use ONLY the facts given below. Do not invent numbers, dates or events.\n2. Every evidence item must name the input field it comes from in\n   \"source_field\" (for example \"September status\" or \"Utilization\").\n3. Give 2 to 4 evidence items, ordered from most to least important.\n   Prefer evidence related to the model drivers.\n4. The segment default rate describes a group of customers, not this\n   customer. Never present it as this customer's probability.\n5. If the customer's own history and the prediction or segment point in\n   different directions, explain this in \"uncertainty\".\n6. If the probability is within 5 percentage points of a policy boundary,\n   say so in \"uncertainty\".\n7. Do not mention or infer sex, age, education or marital status.\n8. Reply with valid JSON only, no text before or after it.\n\n---------------- EXAMPLE (fictional customer, for format only) ----------------\nInput:\n- Prediction: No Default | Probability: 22.40%\n- Customer facts:\n  - Credit limit: NT$200,000\n  - Monthly history (most recent first):\n    - September: status = paid in full; bill = NT$12,500; payment = NT$12,500\n    - August: status = paid in full; bill = NT$9,800; payment = NT$9,800\n    - (July to April: paid in full every month)\n  - Months late (last 6 months): 0 of 6\n  - Utilization (latest bill / limit): 6.2%\n  - Payment ratio (paid / billed, 6 months): 100.0%\n- Segment: Active On-Time Payers (Low risk, segment default rate 13.8%)\n\nOutput:\n{\n  \"customer_id\": \"EXAMPLE\",\n  \"action_level\": \"Standard monitoring\",\n  \"headline\": \"Low predicted risk (22.4%) supported by a clean 6-month repayment record.\",\n  \"evidence\": [\n    {\"fact\": \"Paid in full in September and in every earlier month\", \"source_field\": \"Monthly history\", \"effect\": \"lowers risk\"},\n    {\"fact\": \"0 of the last 6 months were late\", \"source_field\": \"Months late\", \"effect\": \"lowers risk\"},\n    {\"fact\": \"Latest bill uses only 6.2% of the limit\", \"source_field\": \"Utilization\", \"effect\": \"lowers risk\"}\n  ],\n  \"segment_context\": \"Belongs to a low-risk segment (13.8% historical default rate); the individual record agrees with this.\",\n  \"uncertainty\": \"No conflicting signals; probability is far from the 35% boundary.\",\n  \"next_steps\": [\"Keep standard monitoring\", \"Customer may be considered for retention offers after human review\"],\n  \"human_review_required\": false\n}\n--------------------------------------------------------------------------------\n\nNOW WRITE THE MEMO FOR THIS CUSTOMER.\n\nCustomer ID: 18124\n\nSupervised model (Random Forest):\n- Prediction: Default\n- Default probability: 54.72%\n\nWhat the model relies on in general:\n- The two strongest drivers are the most recent repayment status (PAY_0)\n  and the number of late months in the last 6 months (MONTHS_LATE).\n- Next come utilization (latest bill / credit limit) and the repayment\n  status of earlier months (PAY_2, PAY_3).\n- Bill and payment amounts have a smaller effect.\n- Demographics (age, education) have almost no influence on the model.\n\nCustomer facts:\n- Credit limit: NT$60,000\n- Monthly history (most recent first):\n  - September: status = paid the minimum (revolving credit); bill = NT$34,604; payment = NT$1,900\n  - August: status = paid the minimum (revolving credit); bill = NT$35,625; payment = NT$1,953\n  - July: status = paid the minimum (revolving credit); bill = NT$36,701; payment = NT$3,300\n  - June: status = paid the minimum (revolving credit); bill = NT$39,048; payment = NT$0\n  - May: status = 2 months late; bill = NT$37,269; payment = NT$1,430\n  - April: status = paid the minimum (revolving credit); bill = NT$38,000; payment = NT$1,300\n- Months late (last 6 months): 1 of 6\n- Utilization (latest bill / limit): 57.7%\n- Payment ratio (paid / billed, 6 months): 4.5%\n\nCustomer segment (K-Means):\n- Segment: Active On-Time Payers (Low risk)\n- Historical segment default rate: 13.8%\n- Suggested segment action: Retain and grow: eligible for credit-limit increases, rewards and cross-selling. Standard monitoring.\n\nUse the same JSON keys as the example. Set \"human_review_required\" to true\nfor \"Manual review\" and \"Urgent intervention\", or whenever \"uncertainty\"\ndescribes a conflict.\n",
+        "output": "{\n  \"customer_id\": \"18124\",\n  \"action_level\": \"Manual review\",\n  \"headline\": \"Moderate-high predicted default risk (54.72%) driven by past delinquency, revolving balance, and high utilization.\",\n  \"evidence\": [\n    {\n      \"fact\": \"September status was paid the minimum (revolving credit) on a bill of NT$34,604 with a payment of NT$1,900\",\n      \"source_field\": \"September status\",\n      \"effect\": \"raises risk\"\n    },\n    {\n      \"fact\": \"Recorded 1 of 6 months late in the last 6 months, having been 2 months late in May\",\n      \"source_field\": \"Months late\",\n      \"effect\": \"raises risk\"\n    },\n    {\n      \"fact\": \"Latest bill uses 57.7% of the NT$60,000 credit limit\",\n      \"source_field\": \"Utilization\",\n      \"effect\": \"raises risk\"\n    },\n    {\n      \"fact\": \"6-month payment ratio is low at 4.5%\",\n      \"source_field\": \"Payment ratio\",\n      \"effect\": \"raises risk\"\n    }\n  ],\n  \"segment_context\": \"Belongs to the Active On-Time Payers segment (13.8% historical segment default rate), but individual performance indicators show substantially higher risk than this segment average.\",\n  \"uncertainty\": \"The customer's high predicted default probability (54.72%) conflicts with the low historical default rate of the assigned segment (13.8%). Additionally, the default probability of 54.72% is within 5 percentage points of the 50% policy boundary.\",\n  \"next_steps\": [\n    \"Conduct a manual review of account history and repayment capacity\",\n    \"Suspend eligibility for credit-limit increases and promotional offers pending review decision\"\n  ],\n  \"human_review_required\": true\n}",
+        "parsed_output": {
+            "customer_id": "18124",
+            "action_level": "Manual review",
+            "headline": "Moderate-high predicted default risk (54.72%) driven by past delinquency, revolving balance, and high utilization.",
+            "evidence": [
+                {
+                    "fact": "September status was paid the minimum (revolving credit) on a bill of NT$34,604 with a payment of NT$1,900",
+                    "source_field": "September status",
+                    "effect": "raises risk"
+                },
+                {
+                    "fact": "Recorded 1 of 6 months late in the last 6 months, having been 2 months late in May",
+                    "source_field": "Months late",
+                    "effect": "raises risk"
+                },
+                {
+                    "fact": "Latest bill uses 57.7% of the NT$60,000 credit limit",
+                    "source_field": "Utilization",
+                    "effect": "raises risk"
+                },
+                {
+                    "fact": "6-month payment ratio is low at 4.5%",
+                    "source_field": "Payment ratio",
+                    "effect": "raises risk"
+                }
+            ],
+            "segment_context": "Belongs to the Active On-Time Payers segment (13.8% historical segment default rate), but individual performance indicators show substantially higher risk than this segment average.",
+            "uncertainty": "The customer's high predicted default probability (54.72%) conflicts with the low historical default rate of the assigned segment (13.8%). Additionally, the default probability of 54.72% is within 5 percentage points of the 50% policy boundary.",
+            "next_steps": [
+                "Conduct a manual review of account history and repayment capacity",
+                "Suspend eligibility for credit-limit increases and promotional offers pending review decision"
+            ],
+            "human_review_required": true
+        },
+        "json_valid": true
+    },
+    {
+        "case": 2,
+        "customer_id": 9727,
+        "prompt": "\nYou are a senior credit risk officer writing a decision memo about ONE\ncredit card customer for a colleague who must act on the account today.\n\nDECISION POLICY (choose the action level from the default probability):\n- Below 35%      -> \"Standard monitoring\"\n- 35% to 49.99%  -> \"Enhanced monitoring\"\n- 50% to 64.99%  -> \"Manual review\"\n- 65% or higher  -> \"Urgent intervention\"\n\nRULES:\n1. Use ONLY the facts given below. Do not invent numbers, dates or events.\n2. Every evidence item must name the input field it comes from in\n   \"source_field\" (for example \"September status\" or \"Utilization\").\n3. Give 2 to 4 evidence items, ordered from most to least important.\n   Prefer evidence related to the model drivers.\n4. The segment default rate describes a group of customers, not this\n   customer. Never present it as this customer's probability.\n5. If the customer's own history and the prediction or segment point in\n   different directions, explain this in \"uncertainty\".\n6. If the probability is within 5 percentage points of a policy boundary,\n   say so in \"uncertainty\".\n7. Do not mention or infer sex, age, education or marital status.\n8. Reply with valid JSON only, no text before or after it.\n\n---------------- EXAMPLE (fictional customer, for format only) ----------------\nInput:\n- Prediction: No Default | Probability: 22.40%\n- Customer facts:\n  - Credit limit: NT$200,000\n  - Monthly history (most recent first):\n    - September: status = paid in full; bill = NT$12,500; payment = NT$12,500\n    - August: status = paid in full; bill = NT$9,800; payment = NT$9,800\n    - (July to April: paid in full every month)\n  - Months late (last 6 months): 0 of 6\n  - Utilization (latest bill / limit): 6.2%\n  - Payment ratio (paid / billed, 6 months): 100.0%\n- Segment: Active On-Time Payers (Low risk, segment default rate 13.8%)\n\nOutput:\n{\n  \"customer_id\": \"EXAMPLE\",\n  \"action_level\": \"Standard monitoring\",\n  \"headline\": \"Low predicted risk (22.4%) supported by a clean 6-month repayment record.\",\n  \"evidence\": [\n    {\"fact\": \"Paid in full in September and in every earlier month\", \"source_field\": \"Monthly history\", \"effect\": \"lowers risk\"},\n    {\"fact\": \"0 of the last 6 months were late\", \"source_field\": \"Months late\", \"effect\": \"lowers risk\"},\n    {\"fact\": \"Latest bill uses only 6.2% of the limit\", \"source_field\": \"Utilization\", \"effect\": \"lowers risk\"}\n  ],\n  \"segment_context\": \"Belongs to a low-risk segment (13.8% historical default rate); the individual record agrees with this.\",\n  \"uncertainty\": \"No conflicting signals; probability is far from the 35% boundary.\",\n  \"next_steps\": [\"Keep standard monitoring\", \"Customer may be considered for retention offers after human review\"],\n  \"human_review_required\": false\n}\n--------------------------------------------------------------------------------\n\nNOW WRITE THE MEMO FOR THIS CUSTOMER.\n\nCustomer ID: 9727\n\nSupervised model (Random Forest):\n- Prediction: No Default\n- Default probability: 49.8%\n\nWhat the model relies on in general:\n- The two strongest drivers are the most recent repayment status (PAY_0)\n  and the number of late months in the last 6 months (MONTHS_LATE).\n- Next come utilization (latest bill / credit limit) and the repayment\n  status of earlier months (PAY_2, PAY_3).\n- Bill and payment amounts have a smaller effect.\n- Demographics (age, education) have almost no influence on the model.\n\nCustomer facts:\n- Credit limit: NT$140,000\n- Monthly history (most recent first):\n  - September: status = paid in full; bill = NT$326; payment = NT$326\n  - August: status = paid in full; bill = NT$326; payment = NT$326\n  - July: status = paid in full; bill = NT$326; payment = NT$326\n  - June: status = paid in full; bill = NT$326; payment = NT$326\n  - May: status = paid in full; bill = NT$326; payment = NT$326\n  - April: status = paid in full; bill = NT$326; payment = NT$326\n- Months late (last 6 months): 0 of 6\n- Utilization (latest bill / limit): 0.2%\n- Payment ratio (paid / billed, 6 months): 100.0%\n\nCustomer segment (K-Means):\n- Segment: Low-Activity Cardholders (Medium risk)\n- Historical segment default rate: 21.5%\n- Suggested segment action: Activate and verify: usage campaigns, but review any sudden jump in spending, since the default rate is close to the portfolio average.\n\nUse the same JSON keys as the example. Set \"human_review_required\" to true\nfor \"Manual review\" and \"Urgent intervention\", or whenever \"uncertainty\"\ndescribes a conflict.\n",
+        "output": "{\n  \"customer_id\": \"9727\",\n  \"action_level\": \"Enhanced monitoring\",\n  \"headline\": \"Default probability of 49.8% requires enhanced monitoring despite a flawless 6-month repayment record.\",\n  \"evidence\": [\n    {\n      \"fact\": \"Status paid in full for September and all prior months (April through August)\",\n      \"source_field\": \"Monthly history\",\n      \"effect\": \"lowers risk\"\n    },\n    {\n      \"fact\": \"0 of 6 months late over the last 6 months\",\n      \"source_field\": \"Months late\",\n      \"effect\": \"lowers risk\"\n    },\n    {\n      \"fact\": \"Latest utilization is low at 0.2%\",\n      \"source_field\": \"Utilization\",\n      \"effect\": \"lowers risk\"\n    },\n    {\n      \"fact\": \"Payment ratio is 100.0% over 6 months\",\n      \"source_field\": \"Payment ratio\",\n      \"effect\": \"lowers risk\"\n    }\n  ],\n  \"segment_context\": \"Assigned to the Low-Activity Cardholders segment, which has a historical default rate of 21.5%.\",\n  \"uncertainty\": \"The customer's clean payment record (0 months late, 100% payment ratio, full payments) conflicts with the model's high default probability of 49.8%. Furthermore, the 49.8% probability is within 5 percentage points of the 50.0% policy threshold for Manual review.\",\n  \"next_steps\": [\n    \"Initiate enhanced monitoring per decision policy\",\n    \"Perform human review to resolve the conflict between perfect repayment history and high model probability\",\n    \"Monitor account for any unexpected spending spikes\"\n  ],\n  \"human_review_required\": true\n}",
+        "parsed_output": {
+            "customer_id": "9727",
+            "action_level": "Enhanced monitoring",
+            "headline": "Default probability of 49.8% requires enhanced monitoring despite a flawless 6-month repayment record.",
+            "evidence": [
+                {
+                    "fact": "Status paid in full for September and all prior months (April through August)",
+                    "source_field": "Monthly history",
+                    "effect": "lowers risk"
+                },
+                {
+                    "fact": "0 of 6 months late over the last 6 months",
+                    "source_field": "Months late",
+                    "effect": "lowers risk"
+                },
+                {
+                    "fact": "Latest utilization is low at 0.2%",
+                    "source_field": "Utilization",
+                    "effect": "lowers risk"
+                },
+                {
+                    "fact": "Payment ratio is 100.0% over 6 months",
+                    "source_field": "Payment ratio",
+                    "effect": "lowers risk"
+                }
+            ],
+            "segment_context": "Assigned to the Low-Activity Cardholders segment, which has a historical default rate of 21.5%.",
+            "uncertainty": "The customer's clean payment record (0 months late, 100% payment ratio, full payments) conflicts with the model's high default probability of 49.8%. Furthermore, the 49.8% probability is within 5 percentage points of the 50.0% policy threshold for Manual review.",
+            "next_steps": [
+                "Initiate enhanced monitoring per decision policy",
+                "Perform human review to resolve the conflict between perfect repayment history and high model probability",
+                "Monitor account for any unexpected spending spikes"
+            ],
+            "human_review_required": true
+        },
+        "json_valid": true
+    },
+    {
+        "case": 3,
+        "customer_id": 24891,
+        "prompt": "\nYou are a senior credit risk officer writing a decision memo about ONE\ncredit card customer for a colleague who must act on the account today.\n\nDECISION POLICY (choose the action level from the default probability):\n- Below 35%      -> \"Standard monitoring\"\n- 35% to 49.99%  -> \"Enhanced monitoring\"\n- 50% to 64.99%  -> \"Manual review\"\n- 65% or higher  -> \"Urgent intervention\"\n\nRULES:\n1. Use ONLY the facts given below. Do not invent numbers, dates or events.\n2. Every evidence item must name the input field it comes from in\n   \"source_field\" (for example \"September status\" or \"Utilization\").\n3. Give 2 to 4 evidence items, ordered from most to least important.\n   Prefer evidence related to the model drivers.\n4. The segment default rate describes a group of customers, not this\n   customer. Never present it as this customer's probability.\n5. If the customer's own history and the prediction or segment point in\n   different directions, explain this in \"uncertainty\".\n6. If the probability is within 5 percentage points of a policy boundary,\n   say so in \"uncertainty\".\n7. Do not mention or infer sex, age, education or marital status.\n8. Reply with valid JSON only, no text before or after it.\n\n---------------- EXAMPLE (fictional customer, for format only) ----------------\nInput:\n- Prediction: No Default | Probability: 22.40%\n- Customer facts:\n  - Credit limit: NT$200,000\n  - Monthly history (most recent first):\n    - September: status = paid in full; bill = NT$12,500; payment = NT$12,500\n    - August: status = paid in full; bill = NT$9,800; payment = NT$9,800\n    - (July to April: paid in full every month)\n  - Months late (last 6 months): 0 of 6\n  - Utilization (latest bill / limit): 6.2%\n  - Payment ratio (paid / billed, 6 months): 100.0%\n- Segment: Active On-Time Payers (Low risk, segment default rate 13.8%)\n\nOutput:\n{\n  \"customer_id\": \"EXAMPLE\",\n  \"action_level\": \"Standard monitoring\",\n  \"headline\": \"Low predicted risk (22.4%) supported by a clean 6-month repayment record.\",\n  \"evidence\": [\n    {\"fact\": \"Paid in full in September and in every earlier month\", \"source_field\": \"Monthly history\", \"effect\": \"lowers risk\"},\n    {\"fact\": \"0 of the last 6 months were late\", \"source_field\": \"Months late\", \"effect\": \"lowers risk\"},\n    {\"fact\": \"Latest bill uses only 6.2% of the limit\", \"source_field\": \"Utilization\", \"effect\": \"lowers risk\"}\n  ],\n  \"segment_context\": \"Belongs to a low-risk segment (13.8% historical default rate); the individual record agrees with this.\",\n  \"uncertainty\": \"No conflicting signals; probability is far from the 35% boundary.\",\n  \"next_steps\": [\"Keep standard monitoring\", \"Customer may be considered for retention offers after human review\"],\n  \"human_review_required\": false\n}\n--------------------------------------------------------------------------------\n\nNOW WRITE THE MEMO FOR THIS CUSTOMER.\n\nCustomer ID: 24891\n\nSupervised model (Random Forest):\n- Prediction: Default\n- Default probability: 69.01%\n\nWhat the model relies on in general:\n- The two strongest drivers are the most recent repayment status (PAY_0)\n  and the number of late months in the last 6 months (MONTHS_LATE).\n- Next come utilization (latest bill / credit limit) and the repayment\n  status of earlier months (PAY_2, PAY_3).\n- Bill and payment amounts have a smaller effect.\n- Demographics (age, education) have almost no influence on the model.\n\nCustomer facts:\n- Credit limit: NT$80,000\n- Monthly history (most recent first):\n  - September: status = paid the minimum (revolving credit); bill = NT$76,539; payment = NT$3,510\n  - August: status = paid the minimum (revolving credit); bill = NT$21,644; payment = NT$41\n  - July: status = 2 months late; bill = NT$17,427; payment = NT$65,007\n  - June: status = 2 months late; bill = NT$67,659; payment = NT$53\n  - May: status = 2 months late; bill = NT$63,815; payment = NT$3,228\n  - April: status = 2 months late; bill = NT$48,670; payment = NT$0\n- Months late (last 6 months): 4 of 6\n- Utilization (latest bill / limit): 95.7%\n- Payment ratio (paid / billed, 6 months): 24.3%\n\nCustomer segment (K-Means):\n- Segment: Chronic Late Payers (High risk)\n- Historical segment default rate: 57.6%\n- Suggested segment action: Act early: freeze limit increases, contact for repayment plans, prioritize in collections and review the case manually.\n\nUse the same JSON keys as the example. Set \"human_review_required\" to true\nfor \"Manual review\" and \"Urgent intervention\", or whenever \"uncertainty\"\ndescribes a conflict.\n",
+        "output": "{\n  \"customer_id\": \"24891\",\n  \"action_level\": \"Urgent intervention\",\n  \"headline\": \"High default risk (69.01%) driven by repeated late payments and 95.7% credit utilization.\",\n  \"evidence\": [\n    {\n      \"fact\": \"4 of the last 6 months were late\",\n      \"source_field\": \"Months late\",\n      \"effect\": \"raises risk\"\n    },\n    {\n      \"fact\": \"September status was paid minimum, with April through July recorded as 2 months late\",\n      \"source_field\": \"Monthly history\",\n      \"effect\": \"raises risk\"\n    },\n    {\n      \"fact\": \"Latest bill uses 95.7% of the credit limit\",\n      \"source_field\": \"Utilization\",\n      \"effect\": \"raises risk\"\n    },\n    {\n      \"fact\": \"6-month payment ratio is low at 24.3%\",\n      \"source_field\": \"Payment ratio\",\n      \"effect\": \"raises risk\"\n    }\n  ],\n  \"segment_context\": \"Belongs to the Chronic Late Payers (High risk) segment with a 57.6% segment default rate; individual evaluation reflects high segment risk.\",\n  \"uncertainty\": \"The default probability of 69.01% is within 5 percentage points of the 65% policy boundary for Urgent intervention. Additionally, recent status improved to paid minimum in August and September with a large NT$65,007 payment in July, contrasting with the prior 2 months late status.\",\n  \"next_steps\": [\n    \"Freeze credit limit increases\",\n    \"Contact customer for repayment plans\",\n    \"Prioritize in collections and review the case manually\"\n  ],\n  \"human_review_required\": true\n}",
+        "parsed_output": {
+            "customer_id": "24891",
+            "action_level": "Urgent intervention",
+            "headline": "High default risk (69.01%) driven by repeated late payments and 95.7% credit utilization.",
+            "evidence": [
+                {
+                    "fact": "4 of the last 6 months were late",
+                    "source_field": "Months late",
+                    "effect": "raises risk"
+                },
+                {
+                    "fact": "September status was paid minimum, with April through July recorded as 2 months late",
+                    "source_field": "Monthly history",
+                    "effect": "raises risk"
+                },
+                {
+                    "fact": "Latest bill uses 95.7% of the credit limit",
+                    "source_field": "Utilization",
+                    "effect": "raises risk"
+                },
+                {
+                    "fact": "6-month payment ratio is low at 24.3%",
+                    "source_field": "Payment ratio",
+                    "effect": "raises risk"
+                }
+            ],
+            "segment_context": "Belongs to the Chronic Late Payers (High risk) segment with a 57.6% segment default rate; individual evaluation reflects high segment risk.",
+            "uncertainty": "The default probability of 69.01% is within 5 percentage points of the 65% policy boundary for Urgent intervention. Additionally, recent status improved to paid minimum in August and September with a large NT$65,007 payment in July, contrasting with the prior 2 months late status.",
+            "next_steps": [
+                "Freeze credit limit increases",
+                "Contact customer for repayment plans",
+                "Prioritize in collections and review the case manually"
+            ],
+            "human_review_required": true
+        },
+        "json_valid": true
+    }
+]

@@ -1,0 +1,35 @@
+{
+  "customer_id": "24891",
+  "action_level": "Urgent intervention",
+  "headline": "High default risk (69.01%) driven by repeated late payments and 95.7% credit utilization.",
+  "evidence": [
+    {
+      "fact": "4 of the last 6 months were late",
+      "source_field": "Months late",
+      "effect": "raises risk"
+    },
+    {
+      "fact": "September status was paid minimum, with April through July recorded as 2 months late",
+      "source_field": "Monthly history",
+      "effect": "raises risk"
+    },
+    {
+      "fact": "Latest bill uses 95.7% of the credit limit",
+      "source_field": "Utilization",
+      "effect": "raises risk"
+    },
+    {
+      "fact": "6-month payment ratio is low at 24.3%",
+      "source_field": "Payment ratio",
+      "effect": "raises risk"
+    }
+  ],
+  "segment_context": "Belongs to the Chronic Late Payers (High risk) segment with a 57.6% segment default rate; individual evaluation reflects high segment risk.",
+  "uncertainty": "The default probability of 69.01% is within 5 percentage points of the 65% policy boundary for Urgent intervention. Additionally, recent status improved to paid minimum in August and September with a large NT$65,007 payment in July, contrasting with the prior 2 months late status.",
+  "next_steps": [
+    "Freeze credit limit increases",
+    "Contact customer for repayment plans",
+    "Prioritize in collections and review the case manually"
+  ],
+  "human_review_required": true
+}

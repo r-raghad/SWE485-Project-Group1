@@ -1,0 +1,35 @@
+{
+  "customer_id": "9727",
+  "action_level": "Enhanced monitoring",
+  "headline": "Default probability of 49.8% requires enhanced monitoring despite a flawless 6-month repayment record.",
+  "evidence": [
+    {
+      "fact": "Status paid in full for September and all prior months (April through August)",
+      "source_field": "Monthly history",
+      "effect": "lowers risk"
+    },
+    {
+      "fact": "0 of 6 months late over the last 6 months",
+      "source_field": "Months late",
+      "effect": "lowers risk"
+    },
+    {
+      "fact": "Latest utilization is low at 0.2%",
+      "source_field": "Utilization",
+      "effect": "lowers risk"
+    },
+    {
+      "fact": "Payment ratio is 100.0% over 6 months",
+      "source_field": "Payment ratio",
+      "effect": "lowers risk"
+    }
+  ],
+  "segment_context": "Assigned to the Low-Activity Cardholders segment, which has a historical default rate of 21.5%.",
+  "uncertainty": "The customer's clean payment record (0 months late, 100% payment ratio, full payments) conflicts with the model's high default probability of 49.8%. Furthermore, the 49.8% probability is within 5 percentage points of the 50.0% policy threshold for Manual review.",
+  "next_steps": [
+    "Initiate enhanced monitoring per decision policy",
+    "Perform human review to resolve the conflict between perfect repayment history and high model probability",
+    "Monitor account for any unexpected spending spikes"
+  ],
+  "human_review_required": true
+}

@@ -1,0 +1,34 @@
+{
+  "customer_id": "18124",
+  "action_level": "Manual review",
+  "headline": "Moderate-high predicted default risk (54.72%) driven by past delinquency, revolving balance, and high utilization.",
+  "evidence": [
+    {
+      "fact": "September status was paid the minimum (revolving credit) on a bill of NT$34,604 with a payment of NT$1,900",
+      "source_field": "September status",
+      "effect": "raises risk"
+    },
+    {
+      "fact": "Recorded 1 of 6 months late in the last 6 months, having been 2 months late in May",
+      "source_field": "Months late",
+      "effect": "raises risk"
+    },
+    {
+      "fact": "Latest bill uses 57.7% of the NT$60,000 credit limit",
+      "source_field": "Utilization",
+      "effect": "raises risk"
+    },
+    {
+      "fact": "6-month payment ratio is low at 4.5%",
+      "source_field": "Payment ratio",
+      "effect": "raises risk"
+    }
+  ],
+  "segment_context": "Belongs to the Active On-Time Payers segment (13.8% historical segment default rate), but individual performance indicators show substantially higher risk than this segment average.",
+  "uncertainty": "The customer's high predicted default probability (54.72%) conflicts with the low historical default rate of the assigned segment (13.8%). Additionally, the default probability of 54.72% is within 5 percentage points of the 50% policy boundary.",
+  "next_steps": [
+    "Conduct a manual review of account history and repayment capacity",
+    "Suspend eligibility for credit-limit increases and promotional offers pending review decision"
+  ],
+  "human_review_required": true
+}

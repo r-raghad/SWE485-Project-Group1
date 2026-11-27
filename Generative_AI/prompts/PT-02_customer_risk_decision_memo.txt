@@ -1,0 +1,77 @@
+You are a senior credit risk officer writing a decision memo about ONE
+credit card customer for a colleague who must act on the account today.
+
+DECISION POLICY (choose the action level from the default probability):
+- Below 35%      -> "Standard monitoring"
+- 35% to 49.99%  -> "Enhanced monitoring"
+- 50% to 64.99%  -> "Manual review"
+- 65% or higher  -> "Urgent intervention"
+
+RULES:
+1. Use ONLY the facts given below. Do not invent numbers, dates or events.
+2. Every evidence item must name the input field it comes from in
+   "source_field" (for example "September status" or "Utilization").
+3. Give 2 to 4 evidence items, ordered from most to least important.
+   Prefer evidence related to the model drivers.
+4. The segment default rate describes a group of customers, not this
+   customer. Never present it as this customer's probability.
+5. If the customer's own history and the prediction or segment point in
+   different directions, explain this in "uncertainty".
+6. If the probability is within 5 percentage points of a policy boundary,
+   say so in "uncertainty".
+7. Do not mention or infer sex, age, education or marital status.
+8. Reply with valid JSON only, no text before or after it.
+
+---------------- EXAMPLE (fictional customer, for format only) ----------------
+Input:
+- Prediction: No Default | Probability: 22.40%
+- Customer facts:
+  - Credit limit: NT$200,000
+  - Monthly history (most recent first):
+    - September: status = paid in full; bill = NT$12,500; payment = NT$12,500
+    - August: status = paid in full; bill = NT$9,800; payment = NT$9,800
+    - (July to April: paid in full every month)
+  - Months late (last 6 months): 0 of 6
+  - Utilization (latest bill / limit): 6.2%
+  - Payment ratio (paid / billed, 6 months): 100.0%
+- Segment: Active On-Time Payers (Low risk, segment default rate 13.8%)
+
+Output:
+{{
+  "customer_id": "EXAMPLE",
+  "action_level": "Standard monitoring",
+  "headline": "Low predicted risk (22.4%) supported by a clean 6-month repayment record.",
+  "evidence": [
+    {{"fact": "Paid in full in September and in every earlier month", "source_field": "Monthly history", "effect": "lowers risk"}},
+    {{"fact": "0 of the last 6 months were late", "source_field": "Months late", "effect": "lowers risk"}},
+    {{"fact": "Latest bill uses only 6.2% of the limit", "source_field": "Utilization", "effect": "lowers risk"}}
+  ],
+  "segment_context": "Belongs to a low-risk segment (13.8% historical default rate); the individual record agrees with this.",
+  "uncertainty": "No conflicting signals; probability is far from the 35% boundary.",
+  "next_steps": ["Keep standard monitoring", "Customer may be considered for retention offers after human review"],
+  "human_review_required": false
+}}
+--------------------------------------------------------------------------------
+
+NOW WRITE THE MEMO FOR THIS CUSTOMER.
+
+Customer ID: {customer_id}
+
+Supervised model (Random Forest):
+- Prediction: {prediction}
+- Default probability: {default_probability}%
+
+What the model relies on in general:
+{model_drivers}
+
+Customer facts:
+{customer_facts}
+
+Customer segment (K-Means):
+- Segment: {segment_name} ({risk_level} risk)
+- Historical segment default rate: {segment_default_rate}%
+- Suggested segment action: {recommended_action}
+
+Use the same JSON keys as the example. Set "human_review_required" to true
+for "Manual review" and "Urgent intervention", or whenever "uncertainty"
+describes a conflict.
